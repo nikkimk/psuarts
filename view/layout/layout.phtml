@@ -150,33 +150,28 @@ $userBar = $this->userBar();
                 float: right;
             }
             footer {
-                padding: 20px;
-                margin-top: 12px;
-                color: var(--bg-color);
-                background-color: var(--secondary-accent-color);
+                display:block;
+                /*screen */
                 display: flex;
                 align-items: stretch;
                 justify-content: space-between;
             }
+            footer p,
             footer ul {
-                list-style-type: none;
+                margin: 16px 0;
+            }
+            /*screen */
+            footer ul {
                 margin: 0;
                 padding: 0;
                 display: flex;
-                align-items: flex-start;
-                justify-content: space-between;
+                list-style-type: none;
+                align-items: stretch;
             }
-            footer li {
-                padding: 0 0.5em;
-            }
-            footer li:first-child {
-                padding-left: 0;
-            }
-            footer li:last-child {
-                padding-right: 0;
-            }
+            /*screen */
             footer li:not(:last-child):after {
                 content: ' | ';
+                text-align: center;
                 padding: 0 0.5em;
             }
             footer a {
@@ -186,11 +181,16 @@ $userBar = $this->userBar();
                 color: var(--bg-color);
             }
             .site-footer-logo {
+                width: 100%;
+                /*screen */
                 width: 160px;
                 height: auto;
             }
-            .site-footer-text {
-                font-size: 80%;
+            .site-footer-text > div {
+                margin: 10px 20px;
+            }
+            .site-footer-text > div:not(:last-child) {
+                border-bottom: 1px groove;
             }
         </style>
     </head>
@@ -234,12 +234,19 @@ $userBar = $this->userBar();
                 <?php else: ?>
                     <?php echo $footerBranding ?>
                 <?php endif; ?>
-                <div class="site-footer-text">
-                    <?php if ($footerContent = $this->themeSetting('footer')): ?>
-                        <?php echo $footerContent; ?>
-                    <?php else: ?>
-                        <?php echo $this->translate('Powered by Omeka S');?>
-                    <?php endif; ?>
+                    <div class="site-footer-text">
+                        <?php if ($this->themeSetting('footer') || $this->themeSetting('footer_secondary')): ?>
+                            <?php if ($footerPrimary = $this->themeSetting('footer')):?>
+                                <div><?php echo $footerPrimary; ?></div>
+                            <?php endif; ?>
+                            <?php if ($footerSecondary = $this->themeSetting('footer_secondary')):?>
+                                <div><?php echo $footerSecondary; ?></div>
+                            <?php endif; ?>
+                            </div>
+                        <?php else: ?>
+                            <div><?php echo $this->translate('Powered by Omeka S');?></div>
+                        <?php endif; ?>
+                    </div>
                 </div>
             </footer>
         </div>

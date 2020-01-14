@@ -512,9 +512,17 @@ header a {
 /* @group ----- Footer ----- */
 
 footer {
+    padding: 20px;
+    margin-top: 12px;
+    line-height: 140%;
+    font-size: 70%;
+    font-weight: lighter;
+    color: var(--bg-color);
+    background-color: var(--secondary-accent-color);
     margin-top: (2 * $spacing-l);
     clear: both;
 }
+
 
 #bottom-nav li {
     display: inline-block;
