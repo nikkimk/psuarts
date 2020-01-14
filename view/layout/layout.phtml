@@ -5,6 +5,10 @@ $isHomepage = $site->homepage()->siteUrl() == preg_replace('/[\?#].*/','',$_SERV
 $hasHeadingFont = $this->themeSetting('heading_font') && $this->themeSetting('heading_font_url') && $this->themeSetting('heading_font_type');
 $hasBodyFont = $this->themeSetting('body_font') && $this->themeSetting('body_font_url') && $this->themeSetting('body_font_type');
 $logoBg = $this->themeSetting('logo_bg') ? 'background-color: transparent; background-image:url('.$this->themeSettingAssetUrl('logo_bg').');' : '';
+$footerBranding = $this->themeSetting('footer_branding_text') ? $escape($this->themeSetting('footer_branding_text')) : '';
+if($this->themeSetting('footer_branding_text') && $this->themeSetting('footer_branding_logo')):
+    $footerBranding = '<img class="site-footer-logo" src="'.$this->themeSettingAssetUrl('footer_branding_logo').'" alt="'.$escape($this->themeSetting('footer_branding_text')).'">';
+endif;
 if ($isHomepage == true): 
     $this->htmlElement('body')->appendAttribute('class', 'homepage');
 endif;
@@ -150,6 +154,43 @@ $userBar = $this->userBar();
                 margin-top: 12px;
                 color: var(--bg-color);
                 background-color: var(--secondary-accent-color);
+                display: flex;
+                align-items: stretch;
+                justify-content: space-between;
+            }
+            footer ul {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                display: flex;
+                align-items: flex-start;
+                justify-content: space-between;
+            }
+            footer li {
+                padding: 0 0.5em;
+            }
+            footer li:first-child {
+                padding-left: 0;
+            }
+            footer li:last-child {
+                padding-right: 0;
+            }
+            footer li:not(:last-child):after {
+                content: ' | ';
+                padding: 0 0.5em;
+            }
+            footer a {
+                color: var(--bg-color);
+            }
+            footer a:visited {
+                color: var(--bg-color);
+            }
+            .site-footer-logo {
+                width: 160px;
+                height: auto;
+            }
+            .site-footer-text {
+                font-size: 80%;
             }
         </style>
     </head>
@@ -185,11 +226,21 @@ $userBar = $this->userBar();
             </div>
 
             <footer>
-                <?php if ($footerContent = $this->themeSetting('footer')): ?>
-                <?php echo $footerContent; ?>
+                <?php if ($this->themeSetting('footer_branding_url') && $this->themeSetting('footer_branding_text')): ?>
+                    <a href="<?php echo $this->themeSetting('footer_branding_url')?>" 
+                        title="<?php $escape($this->themeSetting('footer_branding_text')) ?>">
+                        <?php echo $footerBranding ?>
+                    </a>
                 <?php else: ?>
-                    <?php echo $this->translate('Powered by Omeka S');?>
+                    <?php echo $footerBranding ?>
                 <?php endif; ?>
+                <div class="site-footer-text">
+                    <?php if ($footerContent = $this->themeSetting('footer')): ?>
+                        <?php echo $footerContent; ?>
+                    <?php else: ?>
+                        <?php echo $this->translate('Powered by Omeka S');?>
+                    <?php endif; ?>
+                </div>
             </footer>
         </div>
         <div hidden><?php echo print_r(array_keys(get_defined_vars($this->helper))); ?></div>
