@@ -14,6 +14,9 @@ a {
     &:hover {
         text-decoration: underline;
     }
+    &:visited {
+        color: $secondary-accent;
+    }
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -285,11 +288,17 @@ nav ul {
 
     &.active a {
         color: $primary-accent;
+        /*TODO &:visited {
+            color: $primary-accent;
+        }*/
     }
 }
 
 .secondary-nav a {
     color: #676767;
+    /*TODO &:visited {
+        color: $primary-accent;
+    }*/
 }
 
 /* @end */
@@ -336,6 +345,10 @@ header nav a {
 
 header a {
     text-decoration: none;
+    color: $background-color;
+    &:visited {
+        color: $background-color;
+    }
 }
 
 .site-title {
