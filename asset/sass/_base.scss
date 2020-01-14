@@ -1,0 +1,27 @@
+//Typography
+
+$base-font-size: 18px;
+$base-line-height: 24px;
+
+//Spacing
+
+$spacing-s: .25 * $base-line-height;
+$spacing-m: .5 * $base-line-height;
+$spacing-l: $base-line-height;
+
+//Colors
+
+$primary-accent: var(--primary-accent-color,#C72E2E);
+$secondary-accent: var(--secondary-accent-color,#C72E2E);
+$text-color: var(--text-color,#000);
+$background-color: var(--bg-color,#fff);
+$gray: #dedede;
+
+//Susy
+$susy: (
+  columns: 16,
+  gutters: 1/4,
+  math: fluid,
+  output: float,
+  gutter-position: inside,
+);
